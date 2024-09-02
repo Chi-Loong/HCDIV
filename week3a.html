@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>3a: Why do data viz?</title>
+
+        <meta name="description" content="02.526 Why do data viz?">
+        <meta name="author" content="Chan Chi-Loong, V/R">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/night.css" id="theme">
+        <link rel="stylesheet" href="css/style.css">
+        
+        <style>
+        </style>
+        
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section data-state="alert" data-transition="zoom">
+                    <h1 class="shadowfont white">3a: Task abstraction</h1>
+                    <h3>Why do data viz?</h3>
+                </section>
+                
+                <section>
+                    <h3>Why: An overview</h3>
+                    <a href="img/user_why_viz.jpg" target="_blank"><img src="img/user_why_viz.jpg"></a>
+                    <p class="smallfont"><i>Visualization Analysis and Design, chapter 3, Munzner</i></p>
+                </section>
+                
+                <section>
+                    <h3>Why task abstraction?</h3>
+                    <p>Thinking about <i>why</i> in an abstract form, rather than the domain specific way users often talk about data viz.</p>
+                    <p>This will allow us a framework to discuss use cases, which may on surface look different.</p>
+                </section>
+
+                <section>
+                    <h3>Actions / Targets</h3>
+                    <p>This proposed taxonomy is from Munzner's framework (Visualization Analysis and Design, chapter 3)</p>
+                    <p><b>Actions</b> in this case is a verb, and targets are <b>nouns</b>.</p>
+                    <hr/>
+                    <p class="smallfont">Reading: <i><a href="https://www.cs.ubc.ca/labs/imager/tr/2013/MultiLevelTaskTypology/brehmer_infovis13.pdf" target="_blank">A multi-level typology of abstract visualization tasks</a></i>, Bremmer, Munzner</p>
+                    <p class="smallfont">Reading: <i><a href="https://homes.cs.washington.edu/~jheer/files/idfva-draft.pdf" target="_blank">Taxonomy of interactive dynamics for visual analysis</a></i>, Schneiderman, Heer</p>
+                </section>
+
+                <section>
+                    <h3>Viz designer or user?</h3>
+                    <p>Are you consuming the visualization or producing it?</p>
+                    <p>Viz tools fall somewhere along a continuum from specific to general.</p>
+                    <p class="smallfont">On the general side, tools are flexible and allow users many choices what to make.</p>
+                    <p class="smallfont">On the specific side, the tool is curated and choices are limited in how an end user can interact with the data set.</p>
+                </section>
+                
+                <section>
+                    <h4>Exploratory Analysis vs Presentation</h4>
+                    <img src="img/ticket-trends.jpg">
+                    <p class="smallfont"><i>Storytelling with data, chapter 1, Nussbaumer</i></p>
+                </section>
+
+                <section>
+                    <h3>3-levels of actions</h3>
+                    <a href="img/3-levels-actions.jpg" target="_blank"><img src="img/3-levels-actions.jpg"></a>
+                    <p class="smallfont"><i>Visualization Analysis and Design, chapter 3, Munzner</i></p>
+                </section>
+
+                <section>
+                    <h3>Actions (verbs)</h3>
+                    <p>The framework give us a way to think about how and why we do tasks, from the high level (<b>how we analyze</b>) to mid-level (<b>how we search</b>) to the low level (<b>query structure</b>).</p>
+                </section>
+
+                <section>
+                    <h3>Analyze (high level)</h3>
+                    <p>Most visualizations are used to consume information in many domain contexts.</p>
+                    <p>Typically it is either for <b>exploratory</b> analysis or for <b>presentation</b>.
+                    <p>When we talk about producing we're talking about generating new data / artefacts - e.g. through annotations and derived columns.</p>
+                    <p>For example, annotating outliers, or tagging clusters in open ended text queries.</p>
+                </section>
+
+                <section>
+                    <h3>Search (mid level)</h3>
+                    <table width="100%">
+                    <tr>
+                        <td></td>
+                        <td><b>Target known</b></td>
+                        <td><b>Target unknown</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>Location known</b></td>
+                        <td>Lookup</td>
+                        <td>Browse</td>
+                    </tr>
+                    <tr>
+                        <td><b>Location unknown</b></td>
+                        <td>Locate</td>
+                        <td>Explore</td>
+                    </tr>
+                    </table>
+                    <hr/>
+                    <p><b>Location:</b> Where does this data exist in?</p>
+                    <p><b>Target:</b> What do you want to query?</p>
+                </section>
+
+                <section>
+                    <p>Let's use the carpark example.</p>
+                    <img src="img/carpark_table.jpg">
+                    <ol>
+                        <li>What's the utilization of carpark BM29 now?</li>
+                        <li>Which carparks have lot type 'C'? List them.</li>
+                        <li>Which housing estate is carpark BM29 in?</li>
+                        <li>Which housing estate has the highest carpark utilization?</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h3>Search Query</h3>
+                    <p>If a search queries known targets (lookup or locate), identify returns their <b>characteristics</b> (the column).</p>
+                    <p>If a search queries references based on characteristics (browse or explore), identify returns <b>references</b> (rows).</p>
+                </section>
+
+                <section>
+                    <h3>Query Structure (low level)</h3>
+                    <p><b>Identify &mdash; Compare &mdash; Summarize</b> is a scale of progression of what to do with the data returned via the query.</p>
+                    <hr/>
+                    <p>E.g. Which carparks have utilization more than 90%?</p>
+                    <ul>
+                        <li><b>Identify:</b> Just list the data</li>
+                        <li><b>Compare:</b> Perhaps sort by utilization so we can more easily compare</li>
+                        <li><b>Summarize:</b> Group carparks by some other metric, e.g. time, area.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Targets (nouns)</h3>
+                    <a href="img/why-targets.jpg" target="_blank"><img src="img/why-targets.jpg"></a>
+                    <p class="smallfont"><i>Visualization Analysis and Design, chapter 3, Munzner</i></p>
+                </section>
+                
+                <section>
+                    <h3>What is the target we're returning?</h3>
+                    <ul>
+                    <li><b>Data:</b> are we looking for trends? Outliers? Specific features?</li>
+                    <li><b>Attributes:</b> are we looking for one attribute or many? Comparison, distribution, correlation?</li>
+                    <li><b>Network Data:</b> are we looking at the topology of the network?</li>
+                    <li><b>Spatial Data:</b> are we looking at the shape of a feature? Distribution or clustering of points?</li>
+                    </ul>
+                </section>
+                
+                <section>
+                <h3>All together: task breakdown</h3>
+                <p>Example: Which carpark is the one with the highest utilization in SG on Monday mornings?</p>
+                <ul>
+                    <li>Analyze: Exploratory analysis</li>
+                    <li>Search: Browse</li>
+                    <li>Query: Identify</li>
+                    <li>Target: One attribute, utilization</li>
+                </ul>
+                </section>
+                
+                <section>
+                <h3>All together: task breakdown 2</h3>
+                <p>Example: <a href="https://elections.viz.sg/" target="_blank">SG election</a>. How did the opposition fare in 2020 compared to 2015?</p>
+                <ul>
+                    <li>Analyze: Presentation</li>
+                    <li>Search: Explore</li>
+                    <li>Query: Compare, Summarization</li>
+                    <li>Target: Trend, Outliers</li>
+                </ul>
+                </section>
+
+                <section>
+                <h3>Thought exercise</h3>
+                <p>How would you frame all these queries?</p>
+                <ul>
+                    <li>How do I get from SUTD to Sembawang?</li>
+                    <li>Which countries in the world have the highest taxes?</li>
+                    <li>What is the current PSI like in Singapore? In the region?</li>
+                    <li>Is Changi a sustainable district?</li>
+                </ul>
+                <hr/>
+                <p>Think about how you would frame your final capstone project query.</p>
+                </section>
+
+                <section>
+                    <h3>Industry perspective on why data viz</h3>
+                    <table width="100%">
+                    <tr>
+                        <td><b>Sample job</b></td>
+                        <td><b>Why data viz</b></td>
+                        <td><b>Tools</b></td>
+                    </tr>
+                    <tr>
+                        <td><p>Data scientist</p></td>
+                        <td>Getting insights</td>
+                        <td>Python, R. Quick and dirty charts</td>
+                    </tr>
+                    <tr>
+                        <td><p>Business analyst</p></td>
+                        <td>Insights + simple dashboards for client / management</td>
+                        <td>Tableau, PowerBI, Qlik</td>
+                    </tr>
+                    <tr>
+                        <td><p>Data journalist</p></td>
+                        <td>Storytelling. Presentation to make things clear</td>
+                        <td>Graphics / animation tools and libraries</td>
+                    </tr>
+                    <tr>
+                        <td><p>Code artist</p></td>
+                        <td>Presentation to impress</td>
+                        <td>3D / Animation / sound / interaction libraries</td>
+                    </tr>
+                    <tr>
+                        <td><p>Product frontend</p></td>
+                        <td>Building a custom product for a specific usecase</td>
+                        <td>D3, JS and CSS frameworks</td>
+                    </tr>
+                    <tr>
+                        <td><p>Product backend (e.g. regulator)</p></td>
+                        <td>Building a custom product for a specific usecase</td>
+                        <td>tech architecture, database and warehousing, backend and devops</td>
+                    </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h3>Viz Tools recapped</h3>
+                    <img src="img/viztools.jpg"/>
+                </section>
+                
+                <section>
+                    <h4>How: An overview</h4>
+                    <a href="img/how-idioms.jpg" target="_blank"><img src="img/how-idioms.jpg"></a>
+                    <hr/>
+                    <p class="smallfont">We'll cover definitions and sample idioms later in the course.</p>
+                </section>
+
+                
+                <section>
+                    <h2>Questions?</h2>
+                    <div class="plain">
+                        <div class="rotate-icon"><a href="http://www.vslashr.com"><img width="100" src="img/VslashR_logo_white.svg"></a></div>
+                    </div>
+                    <p><small>Chi-Loong | V/R</small></p>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>

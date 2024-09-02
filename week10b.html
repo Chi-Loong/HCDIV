@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>10b: Leaflet / 2.5D Maps</title>
+
+        <meta name="description" content="02.526 Leaflet /3D Maps">
+        <meta name="author" content="Chan Chi-Loong, V/R">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/night.css" id="theme">
+        <link rel="stylesheet" href="css/style.css">
+        
+        <style>
+        </style>
+        
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section data-state="alert" data-transition="zoom">
+                    <h1 class="shadowfont white">10b: Leaflet / 2.5D / 3D Maps</h1>
+                </section>
+                
+                <section>
+                    <h2>Objectives</h2>
+                    <ul>
+                    <li>Integrate D3 layers with Leaflet and a map tiling platform (e.g. Open Street Maps)</li>
+                    <li>Look at a simple 3D example using Mapbox.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>What is Leaflet?</h2>
+                    <p><a href="https://leafletjs.com/" target="_blank">Leaflet</a> is the leading open-source JavaScript library for mobile-friendly interactive maps. Weighing just about 39 KB of JS, it has all the mapping features most developers ever need.</p>
+                </section>
+
+                <section>
+                    <h3>Installing Leaflet</h3>
+                    <p>Let's use the <a href="assignments/assignment4-starter.html" target="_blank">assignment 4 starter</a> as a base template.</p>
+                    <p>We'll also need the SG <a href="assignments/sgmap.json" target="_blank">GeoJSON dataset</a>.</p>
+                    <p>We're going to add <a href="https://leafletjs.com/" target="_blank">Leaflet</a> CSS and JS via a <a href="https://cdnjs.com/libraries/leaflet/1.7.1" target="_blank">CDN</a>.</p>
+                    <pre><code style="color:cyan">
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+                    </code></pre>
+                    <pre><code style="color:lightgreen">
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js">&lt;/script>
+                    </code></pre>
+                </section>
+                
+                <section>
+                    <h3>Load Leaflet basemap</h3>
+                    <p class="smallfont">Ignore / comment out the D3 code for now.</p>
+                    <p class="smallfont">You'll need to create a map container for Leaflet to hook to.</p>
+                    <p class="smallfont">Make sure you can get Leaflet and the base map tiles to load.</p>
+                    <pre><code style="color:cyan">
+#map {
+    width: 1000px;
+    height: 600px;
+}
+                    </code></pre>
+                    <pre><code style="color:lightgreen">
+&lt;div id="map">&lt;/div>
+                    </code></pre>
+                    <pre><code style="color:gold">
+let tiles = new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: 'Tiles &copy; OpenStreeMaps'
+});
+
+let map = new L.Map("map", {
+        center: [1.347833, 103.809357], 
+        zoom: 11,
+    })
+    .addLayer(tiles);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Add maxBounds</h3>
+                    <pre><code style="color:gold">
+let map = new L.Map("map", {
+        center: [1.347833, 103.809357], 
+        zoom: 11,
+        maxBounds: L.latLngBounds(L.latLng(1.1, 103.5), L.latLng(1.5, 104.3))
+    })
+    .addLayer(tiles);
+                    </code></pre>
+                <hr/>
+                <p class="smallfont">Try adding in parameters like maxZoom and minZoom. Find out more on the <a href="https://leafletjs.com/" target="_blank">Leaflet</a> docs.</p>
+                </section>
+
+                <section>
+                    <h3>Other basemaps: Google Tiles</h3>
+                    <pre><code style="color:gold">
+let tiles = new L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+    subdomains:['mt0','mt1','mt2','mt3'],
+    attribution: 'Tiles &copy; Google'
+});
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Other basemaps: ESRI ArcGISOnline</h3>
+                    <pre><code style="color:gold">
+let tiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri'
+});
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Map styles</h3>
+                    <p>For many base maps you need to register or install their script.</p>
+                    <p>Here's a small list of <a href="https://github.com/leaflet-extras/leaflet-providers" target="_blank">Leaflet providers</a></p>
+                </section>
+
+                <section>
+                    <section>
+                        <h3>Leaflet ideas</h3>
+                        <p>You can already do a lot of things within Leaflet and base map tiles.</p>
+                        <p><a href="https://leafletjs.com/examples.html" target="_blank">Leaflet Examples</a></p>
+                        <hr/>
+                        <p class="smallfont">Can you add a marker location at the SUTD campus on your map?</p>
+                    </section>
+
+                    <section>
+                        <pre><code>
+    let marker = L.marker([1.34128961848499, 103.96340773679763]).addTo(map);
+    marker.bindPopup("<b>SUTD campus</b>");
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <h3>Hook D3 with Leaflet</h3>
+                    <p>Hook a SVG layer into Leaflet's overlayPane.</p>
+                    <pre><code style="color:gold">
+let svg = d3.select(map.getPanes().overlayPane)
+    .append("svg")
+    .attr("width", 1000)
+    .attr("height", 600)
+        .append("g")
+        .attr("id","svgLayer")
+        .attr("class", "leaflet-zoom-hide");
+                    </code></pre>
+                    <p class="smallfont">The leaflet-zoom-hide class is so that when you use Leaflet zoom, it turns of the layer temporarily during the zooming animation.</p>
+                    <p class="smallfont">You can try what happens when you don't include this in the final instance.</p>
+                </section>
+                
+                <section>
+                    <h3>Set SVG projection to use Leaflet</h3>
+                    <p class="smallfont">You cannot use the Mercator projection. The projection needs to be the same as Leaflet's.</p>
+                    <p class="smallfont">Leaflet uses its own geo projection, and we're going to make D3 sync with that.</p>
+                    <p class="smallfont">Recall that D3 projection is simply taking a lat/lon coordinate and turning it into a SVG x, y point.</p>
+                    <pre><code style="color:gold">
+function projectPoint(x, y) {
+  var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+  this.stream.point(point.x, point.y);
+}
+
+let projection = d3.geoTransform({point: projectPoint})
+let geopath = d3.geoPath().projection(projection);
+                    </code></pre>
+                </section>
+                
+                <section>
+                    <h3>Update D3 redraw</h3>
+                    <p class="smallfont">Looks good. But zooming and scaling breaks the visualization.</p>
+                    <p class="smallfont">We're going to write a function recalculate the bounds and redraw the SVG when moved...</p>
+                    <pre><code style="color:gold">
+function redrawLeafletLayer() {
+    // d3.geo.bounds takes a single Feature or a FeatureCollection as argument
+    let bounds = geopath.bounds(data[0]),
+        topLeft = bounds[0],
+        bottomRight = bounds[1];
+
+    let svg = d3.select(map.getPanes().overlayPane).select("svg");
+        
+    svg.attr("width", bottomRight[0] - topLeft[0])
+       .attr("height", bottomRight[1] - topLeft[1])
+       .style("left", topLeft[0] + "px")
+       .style("top", topLeft[1] + "px");
+       
+    svg.select("g").attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+        
+    d3.select("#map svg g#districts").selectAll("path")
+       .attr("d", geopath);
+}                    
+                    </code></pre>
+                </section>
+                
+                <section>
+                    <h3>Update Leaflet zoomend hook</h3>
+                    <p class="smallfont">...Then we're going to call this function every time Leaflet is zoomed.</p>
+                    <pre><code style="color:gold">
+  redrawLeafletLayer();
+  // reset whenever map is moved
+  map.on('zoomend', redrawLeafletLayer);
+                    </code></pre>
+                    <hr/>
+                    <p class="smallfont">ObservableHQ on how to use <a href="https://observablehq.com/@sfu-iat355/intro-to-leaflet-d3-interactivity" target="_blank">D3 with Leaflet</a>.</p>
+                </section>
+
+                <section>
+                    <h3>Leaflet - mouse interaction</h3>
+                    <p>Leaflet turns off mouse events for all overlay SVG panes by default.</p>
+                    <p>Add the "leaflet-interactive" class to every SVG tag (the appended paths in the case of districts) that you want to make interactive.</p>
+                </section>
+
+                <section>
+                    <h3>2.5D maps using Mapbox</h3>
+                    <p><a href="https://www.mapbox.com/" target="_blank">Mapbox</a> isn't a true 3D solution, say unlike <a href="https://cesium.com/" target="_blank">Cesium</a>.</p>
+                    <p>Comparison <a href="https://blog.logrocket.com/cesium-vs-mapbox-which-mapping-service-is-best/" target="_blank">here</a>.</p>
+                    <p>Please go get your own <a href="https://www.mapbox.com/" target="_blank">mapbox</a> API key - it's free for low amount of usage.</p>
+                    <p>We're going to run this <a href="https://docs.mapbox.com/mapbox-gl-js/example/3d-buildings/" target="_blank">example</a> from mapbox.</p>
+                    <p>All 2.5D mapbox code will be run using your own API key!</p>
+                </section>
+
+                <section>
+                    <h3>Mapbox - embed 3D object</h3>
+                    <p>We're going to embed a 3D object. We'll use three.js to load it, then render it using mapboxGL canvas renderer.</p>
+                    <p>We'll run this <a href="https://docs.mapbox.com/mapbox-gl-js/example/add-3d-model/" target="_blank">example</a> from mapbox.</p>
+                    <p>Extra: Will demo an example locally, using three.js code to load animation.</p>
+                </section>
+
+                <section>
+                    <h3>3D - future perspectives</h3>
+                    <p><a href="https://medium.com/vis-gl/deckgl-and-mapbox-better-together-47b29d6d4fb1" target="_blank">deck.gl and Mapbox GL JS: Better Together</a>, Xiao Ji Chen</p>
+                    <p><a href="https://carto.com/blog/our-thoughts-as-mapboxgl-js-2-goes-proprietary/" target="_blank">Our Thoughts as MapboxGL JS v2.0 Goes Proprietary</a>, Carto</p>
+                    <p><a href="https://sandcastle.cesium.com/" target="_blank">Cesium Sandcastle</a></p>
+                    <p><a href="https://deck.gl/examples" target="_blank">deck.gl Examples</a></p>
+                </section>
+
+                <section>
+                    <h2>Questions?</h2>
+                    <div class="plain">
+                        <div class="rotate-icon"><a href="http://www.vslashr.com"><img width="100" src="img/VslashR_logo_white.svg"></a></div>
+                    </div>
+                    <p><small>Chi-Loong | V/R</small></p>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>

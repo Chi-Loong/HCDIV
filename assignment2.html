@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Assignment 2</title>
+
+        <meta name="description" content="Assignment 2">
+        <meta name="author" content="Chan Chi-Loong, V/R">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/night.css" id="theme">
+        <link rel="stylesheet" href="css/style.css">
+        
+        <style>
+        </style>
+        
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section data-state="alert" data-transition="zoom">
+                    <h1 class="shadowfont white">Assignment 2</h1>
+                    <h3>Critique of visualizations</h3>
+                </section>
+
+                <section>
+                    <h3>Setup</h3>
+                    <p>To be completed by <b>14-3-2021</b>(Thurs) 1200hrs</p>
+                    <ul>
+                    <li>This repo link will be of the format https://<b>&lt;username&gt;</b>.github.io/HASS-assignment2</li>
+                    <li>In the repo create a basic <b>index.html</b> file, and make it visible on GitHub repo pages (it's under the settings tab, under GitHub pages).</li>
+                    <li>You can put your CSS style tags, HTML and JS script code into one file, or organize them into files/directories.</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h3>Background</h3>
+                    <ul>
+                    <li>We have spent some time discussing the visualization model. What (data) - why (task) - how (idiom)</li>
+                    <li>We have also looked at viz validation from a 4-step framework. The right domain - data - idiom - tech.</li>
+                    <li>It is time to take some time to think about the heart of these issues a little more deeply.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Critique: Data and Idioms</h3>
+                    <ul>
+                    <li>It is harder to critique domain issues unless you've worked on the visualization.</li>
+                    <li>Similarly, it is harder to critique tech issues unless you've worked on it.</li>
+                    <li>However, when it comes to the idiom and to an extent data, it is far easier for us to critique choices.</li>
+                    <li>You can find visualization examples on the Data Is Beautiful reddit or any number of <a href="week1b.html#/22" target="_blank">blogs</a>.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Assignment</h3>
+                    <ul>
+                    <li>Bad visualizations can arise from data issues - badly chosen data scale, missing / inaccurate data, etc.</li>
+                    <li>Another pitfall is choosing the wrong idiom / putting it together badly - too many color channels, chartjunk, etc.</li>
+                    <li>Find 2 <b>visualization examples</b>, and dissect it critically on what you feel is wrong.</li>
+                    <li>Comment on the <b>data</b> and <b>idiom</b> issues. Can be for both visualizations or one each.</li>
+                    <li>Also comment on how the visualizations can be improved.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>More details</h3>
+                    <ul>
+                    <li>This assignment is to get you to think about all the theory that we've learnt so far in this course.</li>
+                    <li>Beyond the tech execution, we also arm ourselves with tools to think critically about visualizations. This exercise will help you think and frame your project.</li>
+                    <li>Not a writing essay assignment, so short paragraphs or bullet points are fine.</li>
+                    <li>For this module, I will ask you to present your critiques to the class after submissions are in.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Questions?</h2>
+                    <div class="plain">
+                        <div class="rotate-icon"><a href="http://www.vslashr.com"><img width="100" src="img/VslashR_logo_white.svg"></a></div>
+                    </div>
+                    <p><small>Chi-Loong | V/R</small></p>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>

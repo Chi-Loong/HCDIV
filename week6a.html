@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>6a: Color</title>
+
+        <meta name="description" content="02.526 Color">
+        <meta name="author" content="Chan Chi-Loong, V/R">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/night.css" id="theme">
+        <link rel="stylesheet" href="css/style.css">
+        
+        <style>
+        </style>
+        
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section data-state="alert" data-transition="zoom">
+                    <h1 class="shadowfont white">6a: Color</h1>
+                </section>
+                
+                <section>
+                    <h3>Color</h3>
+                    <ul>
+                    <li><b>Perception</b>: How the eye perceives color</li>
+                    <li><b>Specification</b>: How we specify color</li>
+                    <li><b>Use</b>: Use of color in visualizations</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h3>Visible electromagenetic spectrum</h3>
+                    <img src="img/EMS_visible_light.jpg"/>
+                    <p class="smallfont">Visible light is roughly in the wavelengths of 400nm (4 x 10<sup>-7</sup>m) to 700nm (7 x 10<sup>-7</sup>m).</p>
+                </section>
+
+                <section>
+                    <h3>Eye Structure</h3>
+                    <img src="img/eye_diagram.jpg"/>
+                </section>
+
+                <section>
+                    <h3>Eye: Rods and Cones</h3>
+                    <img src="img/rods_cones_table.jpg"/>
+                    <img src="img/fovea_density.jpg"/>
+                    <p>More detail on the <a href="https://en.wikipedia.org/wiki/Fovea_centralis" target="_blank">fovea</a></p>
+                </section>
+                
+                <section>
+                    <h3>Cones: photoreceptor wavelength</h3>
+                    <img src="img/photoreceptor_sensitivity.jpg"/>
+                    <p class="smallfont">Red cones, or L-cones. 64% of total cones, maximally sensitive to long-wave light</p>
+                    <p class="smallfont">Green cones, or M-cones. 32% of total cones, maximally sensitive to medium-wave light</p>
+                    <p class="smallfont">Blue cones, or S-cones. 2 – 7% of total cones, maximally sensitive to short-wave light</p>
+                </section>
+
+                <section>
+                    <h3>Cones: distribution</h3>
+                    <img src="img/conemosaics.jpg"/>
+                    <p class="smallfont">Left: Illustration of distribution of cones in fovea of human with normal color vision.</p>
+                    <p class="smallfont">Right: Illustration of distribution of cones in fovea of human with protanopic vision, i.e. no L-cones (red cones)</p>
+                </section>
+                
+                <section>
+                    <section>
+                    <h4>What color does the human eye see the most?</h4>
+                    </section>
+                    
+                    <section>
+                    <p><a href="https://edition.cnn.com/2017/06/05/health/colorscope-green-environment-calm/index.html" target="_blank">Why we need green in our lives</a></p>
+                    </section>
+                </section>
+                
+                <section>
+                    <h3>Color blindness 1</h3>
+                    <img src="img/color_blindness_chart.jpg"/>
+                    <p class="smallfont">Color blindness is genetically inherited. About 8% men (esp. northwestern European descent), 0.5% women around the world</p>
+                    <p class="smallfont">Red-green color blindness is passed down on the X chromosome, of which men have only 1 X chromosome (women have 2).</p>
+                </section>
+                
+                <section>
+                    <h3>Color blindness 2</h3>
+                    <p class="smallfont">Common: red-green deficiency (deuteronomaly 6% of males). Less common: protonomaly (2 % of males).</p>
+                    <p class="smallfont">Rare: blue-yellow deficiency, tritanomaly (&lt;0.01%).</p>
+                    <p class="smallfont">More info on <a href="https://en.wikipedia.org/wiki/Color_blindness" target="_blank">color blindness</a></p>
+                    <p class="smallfont">Video: <a href="https://www.youtube.com/watch?v=iUj7y7eqzkU" target="_blank">What causes color blindness?</a></p>
+                </section>
+
+                <section>
+                    <h3>Color blindness 2</h3>
+                    <img src="img/color_blindness_balloons.jpg" target="_blank"/>
+                    <p class="smallfont"><a href="http://vischeck.com/" target="_blank">Vischeck</a>: color blindness simulation and correction</p>
+                </section>
+                
+                <section>
+                    <h3>Colorspace</h3>
+                    <p>A colorspace is a system for describing color numerically.</p>
+                    <ul>
+                        <li>RGB</li>
+                        <li>CMYK</li>
+                        <li>HSV/HSL</li>
+                        <li>CIE Lab</li>
+                        <li>CIE HCL</li>
+                    </ul>
+                    <p>There are many more: XYZ, Munsell, CMS, etc.</p>
+                    <p>Reading: <a href="https://en.wikipedia.org/wiki/List_of_color_spaces_and_their_uses" target="_blank">List of color spaces</a></p>
+                </section>
+                
+                <section>
+                    <h3>Colorspace: <a href="https://en.wikipedia.org/wiki/RGB_color_model" target="_blank">RGB</a></h3>
+                    <img src="img/monitor_magnified.jpg"/>
+                    <img src="img/rgbcube.png"/>
+                    <p class="smallfont">Left: Magnification of pixels on a screen. Right: RGB color cube.</p>
+                    <p class="smallfont">RGB colorspace is additive (i.e. more colors added, the lighter it is).</p>
+                    <p class="smallfont">Problems: Not <a href="https://programmingdesignsystems.com/color/perceptually-uniform-color-spaces/" target="_blank">perceptually uniform</a>.</p>
+                    <p class="smallfont">Reading: <a href="https://observablehq.com/@mattdesl/perceptually-smooth-multi-color-linear-gradients" target="_blank">Perceptually Smooth Multi-Color Linear Gradients</a></p>
+                </section>
+                
+                <section>
+                    <h3>Chromaticity and Color Gamut</h3>
+                    <p>Video: <a href="https://www.youtube.com/watch?v=O0nYJ0Mjx10" target="_blank">CIE 1931 Chromaticity Diagram</a></p>
+                    <p>Video: <a href="https://www.youtube.com/watch?v=fh7mi9qRXdU" target="_blank">Color Gamuts</a></p>
+                    <p>Wiki: <a href="https://en.wikipedia.org/wiki/CIE_1931_color_space" target="_blank">CIE 1931 space</a> and <a href="https://en.wikipedia.org/wiki/Chromaticity" target="_blank">chromaticity</a></p>
+                    <p>Reading: <a href="https://www.androidauthority.com/color-gamuts-guide-3035782/" target="_blank">What are display color gamuts? sRGB, DCI-P3, Rec. 2020 explained</a></p>
+                    <hr/>
+                    <p class="smallfont">CIE (Commission internationale de l'éclairage, or International Commission on Illumination) - international authority on light, illumination, colour, and colour spaces.</p>
+                </section>
+
+                <section>
+                    <h3>Colorspace: <a href="https://en.wikipedia.org/wiki/RGB_color_model" target="_blank">CMYK</a></h3>
+                    <img src="img/CMYK-vs-RGB.jpg"/>
+                    <p class="smallfont">CMYK colorspace is subtractive (i.e. more colors added the darker it is).</p>
+                    <p class="smallfont">CMY is lighter than RGB. Typically for print only.</p>
+                    <p class="smallfont">Reading: <a href="https://www.printplace.com/blog/reasons-for-cmyk-printing/" target="_blank">Why printing uses CMYK</a></p>
+                    <p class="smallfont">Video: <a href="https://www.youtube.com/watch?v=VLNOpQtBF50" target="_blank">CMYK vs Pantone vs RGB</a></p>
+                </section>
+
+
+                <section>
+                    <h3>Colorspace: <a href="https://en.wikipedia.org/wiki/HSL_and_HSV" target="_blank">HSV/HSL</a></h3>
+                    <p>H = Hue, S = Saturation (vividness of color), V/L = Value / Lightness</p>
+                    <img src="img/colorWheel.jpeg"/>
+                    <img src="img/HSV_cylinder.png"/>
+                    <p class="smallfont">Left: Hue described radially. Right: HSV color cylinder</p>
+                    <p class="smallfont">Problems: More intuitive, but also not <a href="https://programmingdesignsystems.com/color/perceptually-uniform-color-spaces/" target="_blank">perceptually uniform</a>.</p>
+                </section>
+
+                <section>
+                    <h3>Colorspace: <a href="https://en.wikipedia.org/wiki/CIELAB_color_space" target="_blank">CIE Lab</a> (or Lab)</h3>
+                    <p>L = Lightness, a = red-green scale, b = yellow-blue scale</p>
+                    <img src="img/CIELab_model.jpg"/>
+                    <p class="smallfont">CIE (Commission internationale de l'éclairage, or International Commission on Illumination) - international authority on light, illumination, colour, and colour spaces.</p>
+                    <p class="smallfont">Designed to better approximate human perception of color.</p>
+                    <p class="smallfont">Perceptually linear (or close).</p>
+                </section>
+
+                <section>
+                    <h3>Colorspace: <a href="https://en.wikipedia.org/wiki/HCL_color_space" target="_blank">CIE HCL</a> (or HCL)</h3>
+                    <p>H = Hue, C = Chroma, L = Luminance</p>
+                    <p class="smallfont">H and C are transformations of a and b in the Lab model.</p>
+                    <img src="img/CIEHCL_model.jpg"/>
+                    <img src="img/CIEHCL_circle.jpg"/>
+                    <p class="smallfont">Perceptually linear, and more intuitive.</p>
+                </section>
+
+                <section>
+                    <h3>Colorspace comparison</h3>
+                    <img src="img/RGB_HCL_comparison.jpg"/>
+                </section>
+
+                <section>
+                    <h3>Recap: Color channels</h3>
+                    <p>Magnitude channel (quantitative) or identity (qualitative)?</p>
+                    <img src="img/ordering_direction.jpg"/>
+                    <img src="img/hue-saturation-luminance.jpg"/>
+                    <p>4th channel: Transparency (used as layer for interaction)</p>
+                    <p><a href="https://github.com/d3/d3-scale-chromatic" target="_blank">D3: Color scales (aka as a channel)</a></p>
+                    <p><a href="https://github.com/d3/d3-color" target="_blank">D3: Colorspace</a></p>
+                </section>
+
+                <section>
+                    <h3>Viridis color palette</h3>
+                    <p>Recap: color blindness</p>
+                    <ul>
+                    <li>Colorful (spans wide palette)</li>
+                    <li>Perceptually uniform</li>
+                    <li>Robust to color blindness</li>
+                    <li>Pretty!</li>
+                    </ul>
+                    <p><a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html" target="_blank">Viridis color palette</a></p>
+                    <p class="smallfont">Reading: <a href="https://observablehq.com/@fil/perceptually-uniform" target="_blank">"Perceptually uniform?" D3 color scales</a></p>
+                    <p class="smallfont">Reading: <a href="https://www.tableau.com/about/blog/2016/4/examining-data-viz-rules-dont-use-red-green-together-53463" target="_blank">5 tips on designing colorblind-friendly visualizations</a></p>
+                    <p>Redundantly encode channels - shape, tooltip, etc.</p>
+                </section>
+
+                <section>
+                    <h3>Color Tools</h3>
+                    <p>Recap: Channel effectiveness: Discriminability.</p>
+                    <p>Not too many color bins. Perceptually distinct colors.</p>
+                    <p><a href="https://medialab.github.io/iwanthue/" target="_blank">I want hue</a></p>
+                    <p><a href="https://colorbrewer2.org/" target="_blank">Color Brewer 2.0</a></p>
+                    <p class="smallfont"><a href="https://www.cs.rpi.edu/~cutler/classes/visualization/S18/papers/colorbrewer.pdf" target="_blank">ColorBrewer.org: An Online Tool for Selecting Colour Schemes for Maps</a></p>
+                </section>
+
+                <section>
+                    <h3>Color: Channel Implications</h3>
+                    <p>Channel: separability - luminance and saturation are not the most separable. Also not separable from transparency. For separability, pick hue vs saturation / luminance.</p>
+                    <p>Channel: salience (popout) - small number of bins.</p>
+                    <p>Rainbow color maps: <a href="https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html" target="_blank">Pros</a> and <a href="https://agilescientific.com/blog/2017/12/14/no-more-rainbows" target="_blank">cons</a></p>
+                    <p>Reading: <a href="https://cambridge-intelligence.com/choosing-colors-for-your-data-visualization/" target="_blank">Choosing colors for your visualization</a></p>
+                    <p>Reading: <a href="https://colorusage.arc.nasa.gov/index.php" target="_blank">Using color in Information Display Graphics</a> (NASA color usage research lab)</p>
+                </section>
+
+                <section>
+                    <h3>Color: Contrast</h3>
+                    <p>Color is perceived differently depending on how it is contrasted with other colors. It is relative and not absolute.</p>
+                    <p><a href="https://en.wikipedia.org/wiki/Bezold_effect" target="_blank">Bezold Effect</a> and <a href="https://en.wikipedia.org/wiki/White%27s_illusion" target="_blank">White's Illusion</a></p>
+                    <p>Reading: <a href="https://colorusage.arc.nasa.gov/guidelines_lum_cont.php" target="_blank">Luminance contrast</a></p>
+                    <p>Reading: <a href="https://colorusage.arc.nasa.gov/Simult_and_succ_cont.php" target="_blank">Simultaneous and successive contrast</a></p>
+                </section>
+
+                <section>
+                    <h3>Color Theory</h3>
+                    <p>Color theory is the collection of rules and guidelines which designers use to communicate with users through appealing color schemes in visual interfaces.</p>
+                    <p><a href="https://www.canva.com/colors/color-wheel/" target="_blank">Color theory and the color wheel</a></p>
+                    <p><a href="https://www.toptal.com/designers/ux/color-in-ux" target="_blank">Role of color in UX</a></p>
+                </section>
+
+                <section>
+                    <h2>Questions?</h2>
+                    <div class="plain">
+                        <div class="rotate-icon"><a href="http://www.vslashr.com"><img width="100" src="img/VslashR_logo_white.svg"></a></div>
+                    </div>
+                    <p><small>Chi-Loong | V/R</small></p>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
