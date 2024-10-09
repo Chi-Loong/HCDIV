@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>Lab 3 Assignment</title>
+<title>Assignment 1</title>
 <style>
 
   /* CSS goes here 
@@ -15,36 +15,29 @@
 </head>
 <body>
 
-<h2>Singapore PSI table</h2>
+<h2>Singapore 2-hr weather forecast</h2>
 <h4 id="timestring"></h4>
-<table id="PSItable">
+<table id="weatherTable">
     <tr>
-        <th>Metric</th>
-        <th>Central</th>
-        <th>West</th>
-        <th>East</th>
-        <th>North</th>
-        <th>South</th>
+        <th>Area</th>
+        <th>Forecast</th>
     </tr>
 </table>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script>
-
-fetch('https://api.data.gov.sg/v1/environment/psi')
+fetch('https://api-open.data.gov.sg/v2/real-time/api/two-hr-forecast')
   .then(response => response.json())
-  .then(data => {
+  .then(responsedata => {
 
     /* JS code goes here.
     
     */
   
-    let timestamp = data.items[0].update_timestamp;
-    let readings = data.items[0].readings;
-    console.log(timestamp);
-    console.log(readings);
+    let timestamp = responsedata.data.items[0].update_timestamp;
+    let forecasts = responsedata.data.items[0].forecasts;
     
-    $("#timestring").text(timestamp);
+    console.log(timestamp);
+    console.log(forecasts);
   
   });
 
