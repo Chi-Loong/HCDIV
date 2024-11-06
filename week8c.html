@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>8c: Choropleth Maps (D3)</title>
+
+        <meta name="description" content="02.526 D3: Choropleth Maps">
+        <meta name="author" content="Chan Chi-Loong, V/R">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/night.css" id="theme">
+        <link rel="stylesheet" href="css/style.css">
+        
+        <style>
+        </style>
+        
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section data-state="alert" data-transition="zoom">
+                    <h1 class="shadowfont white">8c: Choropleth Maps in D3</h1>
+                </section>
+                
+                <section>
+                    <h2>Objectives</h2>
+                    <ul>
+                    <li>Learn about geo projections in D3.</li>
+                    <li>Build a simple Singapore choropleth map.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>GeoJSON world map</h3>
+                    <p>Let's start with a simple HTML template.</p>
+                    <p>We're going to load a basic GeoJSON<a href="https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson" target="_blank"> world map.</a></p>
+                    <pre><code>
+&lt;html>
+&lt;head>
+  &lt;style>&lt;/style>
+&lt;/head>
+&lt;body>
+  &lt;svg>&lt;/svg>
+&lt;script src="https://d3js.org/d3.v7.min.js">&lt;/script>
+&lt;/body>
+&lt;/html>
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>GeoJSON Tools</h3>
+                    <p><a href="https://geojson.org/" target="_blank">GeoJSON specification</p>
+                    <p><a href="https://geojson.io/" target="_blank">GeoJSON.io - Testing</p>
+                    <p><a href="https://en.wikipedia.org/wiki/GeoJSON" target="_blank">Wiki GeoJSON</p>
+                    <p>More reading: <a href="https://macwright.com/2015/03/23/geojson-second-bite.html" target="_blank">More than you ever wanted to know about GeoJSON</a></p>
+                    <p class="smallfont">Fun point: Winding and the right-hand rule.</p>
+                </section>
+                
+                <section>
+                    <p>Add in this JS code.</p>
+                    <pre><code>
+let width = 1000, height = 600;
+
+let svg = d3.select("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+// Map and projection
+let projection = d3.geoEquirectangular();
+let geopath = d3.geoPath().projection(projection);
+
+// Load GeoJSON data
+d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then(data => {
+
+    // Draw the map
+    svg.append("g")
+        .attr("id", "countries")
+        .selectAll("path")
+        .data(data.features)
+        .enter()
+        .append("path")
+            .attr("d",  d => geopath(d))
+            .attr("fill", "#777")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 0.5);
+})
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Projections</h3>
+                    <p>Add in a simple HTML tooltip.</p>
+                    <pre><code>
+&lt;div class="tooltip">&lt;/div>
+                    </code></pre>
+                    <hr/>
+                    <span style="color: cyan";>...</span>
+                    <pre><code>
+.on("mouseover", (event, d) => {
+    d3.select(".tooltip")
+    .text(d.properties.name)
+    .style("position", "absolute")
+    .style("background", "#fff")
+    .style("left", (event.pageX) + "px")
+    .style("top", (event.pageY) + "px");
+})
+.on("mouseout", (event, d) => {
+    d3.select(".tooltip")
+    .text("");
+})
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Recap exercise</h3>
+                    <ol>
+                        <li>Can you make move all the styling into CSS classes? E.g. the country path fills, the tool tip, etc.</li>
+                        <li>Can you make the width and height responsively sized to the screen size? Use the SVG viewBox command.</li>
+                        <li>On mouseover, can you highlight the path with a colored stroke? E.g. d3.select(event.currentTarget) returns the object.</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h3>Projections</h3>
+                    <p>The current projection that we're using is equirectangular.</p>
+                    <p>There are many, many projections, and you can find a list in the <a href="https://github.com/d3/d3-geo-projection" target="_blank">D3 projections</a> module.</p>
+                    <p>Try something like switching it to orthographic (i.e. globe) or some other projection.</p>
+                    <p><a href="https://www.geo-projections.com/" target="_blank">Geo-projections.com</a></p>
+                </section>
+
+                <section>
+                    <h3>Color the oceans</h3>
+                    <code><pre>
+svg.append("path")
+    .datum({type: "Sphere"})
+    .attr("id", "ocean")
+    .attr("d", geopath)
+    .attr("fill", "lightBlue");
+                    </code></pre>
+                    <hr/>
+                    <p class="smallfont">You can define gradients in SVGs. Typically they are under the <b>defs</b> tag. You can of course do this programatically via JS, but you can add this in the SVG tag.</p>
+                    <code><pre>
+  &lt;defs>
+    &lt;linearGradient id="oceanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      &lt;stop offset="0%" style="stop-color:rgb(0,0,27);stop-opacity:1" />
+      &lt;stop offset="100%" style="stop-color:rgb(51,122,183);stop-opacity:1" />
+    &lt;/linearGradient>
+  &lt;/defs>
+                    </code></pre>
+                    <hr/>
+                    <span style="color: cyan";>...</span>
+                    <code><pre>
+    .attr("fill", "url(#oceanGradient)");
+                    </code></pre>
+                </section>
+                
+                <section>
+                    <h3>Projections</h3>
+                    <h4>Scale, rotate, translate, center</h4>
+                    <pre><code>
+d3.geoEquirectangular()
+    .center([-0.118092, 51.509865]) // London's longitude / latitude;
+    .scale(500)
+                    </code></pre>
+                    <hr/>
+                    <p class="smallfont">Can you center the map to around Singapore and zoom in?</p>
+                </section>
+
+                <section>
+                    <h3>Graticules</h3>
+                    <p>A graticule is a network of lines representing meridians and parallels, on which a map or plan can be represented.</p>
+                    <pre><code>
+let graticule = d3.geoGraticule()
+      .step([10, 10]);
+
+svg.append("g")
+    .attr("id", "graticules")
+    .selectAll("path")
+    .data([graticule()])
+    .enter()
+    .append("path")
+    .attr("d", d => geopath(d))
+    .attr("fill", "none")
+    .attr("stroke", "#aaa")
+    .attr("stroke-width", 0.2);
+                    </code></pre>
+                    <p class="smallfont"><a href="https://github.com/d3/d3-geo#geoGraticule" target="_blank">D3 geoGraticule docs</a></p>
+                </section>
+
+                <section>
+                    <h3>Projecting a point</h3>
+                    <p class="smallfont">Recap: D3's projection function takes a longitude, latitude pair and translates it onto your drawing canvas.</p>
+                    <pre><code>
+let singapore = [103.851959, 1.290270] // longitude = x, latitude = y
+            
+svg.append("circle")
+        .attr("cx", projection(singapore)[0])
+        .attr("cy", projection(singapore)[1])
+        .attr("r", 5)
+        .attr("fill", "yellow");
+                    </code></pre>
+                </section>
+
+                <section>
+                    <section>
+                        <h3>Exercise: Cities</h3>
+                        <pre><code>
+    // List of cities
+    let cities = [
+        {name: "Singapore", longitude: 103.851959, latitude: 1.290270},
+        {name: "London", longitude: -0.118092, latitude: 51.509865},
+        {name: "Tokyo", longitude: 139.839478, latitude: 35.652832}
+    ]
+                        </code></pre>
+                        <hr/>
+                        <p class="smallfont">Given this list of cities, can you add them to the map as small coloured circles?</p>
+                        <p class="smallfont">Create a group called cities, and put them there.</p>
+                    </section>
+                    <section>
+                        <pre><code>
+    svg.append("g")
+      .attr("id", "cities")
+      .selectAll("circle")
+      .data(cities)
+      .enter()
+      .append("circle")
+      .attr("cx", d => projection([d.longitude, d.latitude])[0])
+      .attr("cy", d => projection([d.longitude, d.latitude])[1])
+      .attr("r", 5)
+      .attr("fill", "yellow");
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <h3>Animate the map</h3>
+                    <pre><code>
+let time = Date.now();
+
+d3.timer(function() {
+    let angle = (Date.now() - time) * 0.02;
+    projection.rotate([angle, 0, 0]);
+    svg.select("g#countries").selectAll("path")
+      .attr("d", geopath.projection(projection));
+    svg.select("g#graticules").selectAll("path")
+      .attr("d", geopath.projection(projection));
+    svg.select("g#cities").selectAll("circle")
+        .attr("cx", d => projection([d.longitude, d.latitude])[0])
+        .attr("cy", d => projection([d.longitude, d.latitude])[1]);
+});
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Orthographic projection</h3>
+                    <p class="smallfont">In orthographic projection (globe) you can see the cities even when it goes behind the globe. How do we solve this?</p>
+                    <p class="smallfont">Add a test to see whether the point is visible or not:</p>
+                    <pre><code>
+    svg.select("g#cities").selectAll("circle")
+        .attr("cx", d => projection([d.longitude, d.latitude])[0])
+        .attr("cy", d => projection([d.longitude, d.latitude])[1])
+        .attr("visibility", d => {
+            var point = {type: 'Point', coordinates: [d.longitude, d.latitude]};
+            if (geopath(point) == null) {
+                return "hidden";
+            } else { 
+                return "visible";
+            }
+        });
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Questions?</h2>
+                    <div class="plain">
+                        <div class="rotate-icon"><a href="http://www.vslashr.com"><img width="100" src="img/VslashR_logo_white.svg"></a></div>
+                    </div>
+                    <p><small>Chi-Loong | V/R</small></p>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
